@@ -6,7 +6,6 @@ def load_silver(s3, bucket_name, df, today):
 
     s3_key = f'silver/asteroids/date={today}/asteroids.parquet'
     
-
     buffer.seek(0)
 
     s3.put_object(

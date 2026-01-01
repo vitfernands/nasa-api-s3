@@ -5,7 +5,7 @@ from botocore.exceptions import ClientError
 
 def extract_from_bronze(s3, bucket_name, today):
     try:
-        s3_key = f'asteroids/bronze/date={today}/asteroids.json'
+        s3_key = f'bronze/asteroids/date={today}/asteroids.json'
         
         logger.info(f"Coletando dados da camada bronze: s3://{bucket_name}/{s3_key}")
 
