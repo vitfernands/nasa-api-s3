@@ -1,6 +1,6 @@
 import pandas as pd
 from utils.logging_config import logger
-from datetime import datetime, date
+from datetime import datetime, date, time
 
 def transform_bronze_to_silver(df):
     try:
@@ -19,12 +19,20 @@ def transform_bronze_to_silver(df):
             format="%Y-%b-%d %H:%M"
         )
 
-        df["upload_date"] = datetime.now()
+        df["close_approach_date"] = df["close_approach_date"].dt.strftime('%Y-%m-%d %H:%M:%S')
+
+        df["upload_date"] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        print(df.head())
+        print(f"Tipo de dado da coluna close_approach_date: {df["close_approach_date"].dtype}")
+        print(f"Tipo de dado da coluna upload_date: {df["upload_date"].dtype}")
 
         return df
     
     except ValueError as e:
         logger.error(f"Erro ao transformar dados para a camada Silver: {e}")
+        raise
 
     except TypeError as e:
         logger.error(f"Erro ao transformar dados para a camada Silver: {e}")
+        raise

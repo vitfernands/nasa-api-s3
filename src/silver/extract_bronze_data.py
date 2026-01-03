@@ -16,7 +16,11 @@ def extract_from_bronze(s3, bucket_name, today):
 
         df = pd.json_normalize(json_data)
 
-        print(df.head(10))
+        #print(df["close_approach_date"].dtype)
+
+        print("--------------------------------------------------")
+        print(f"Dados Bronze: \n{df}")
+        print("--------------------------------------------------")
 
         return df
     except ClientError as e:

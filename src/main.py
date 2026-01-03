@@ -1,6 +1,6 @@
 from datetime import date
 from src.extract.extract import get_api_data
-from utils.s3 import connect_s3
+from utils.s3_conn import connect_s3
 from src.bronze.bronze_data import send_data_to_s3
 import os
 from dotenv import load_dotenv

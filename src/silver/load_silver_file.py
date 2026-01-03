@@ -4,6 +4,10 @@ def load_silver(s3, bucket_name, df, today):
     buffer = BytesIO()
     df.to_parquet(buffer, index=False)
 
+    print("--------------------------------------------------")
+    print(f"Dados Silver: \n{df.head()}")
+    print("--------------------------------------------------")
+
     s3_key = f'silver/asteroids/date={today}/asteroids.parquet'
     
     buffer.seek(0)
