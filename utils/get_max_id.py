@@ -11,7 +11,7 @@ def get_last_id():
         max_id = cur.fetchone()[0]
         cur.close()
 
-        if max_id < 1 or max_id is None:
+        if max_id is None:
             max_id = 1
 
         return max_id

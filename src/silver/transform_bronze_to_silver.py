@@ -32,7 +32,7 @@ def transform_bronze_to_silver(df):
         max_id = get_last_id()
         new_id = max_id + 1
 
-        df["asteroid_id"] = df.range(new_id, new_id + len(df))
+        df["asteroid_id"] = range(new_id, new_id + len(df))
 
         return df
     
