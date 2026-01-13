@@ -6,28 +6,24 @@ from utils.logging_config import logger
 load_dotenv()
 
 def snowflake_conn():
-    return snowflake.connector.connect(
-        user=os.getenv("SNOWFLAKE_USER"),
-        password=os.getenv("SNOWFLAKE_PASSWORD"),
-        account=os.getenv("SNOWFLAKE_ACCOUNT"),
-        database=os.getenv("SNOWFLAKE_DATABASE"),
-        schema=os.getenv("SNOWFLAKE_SCHEMA")
-    )
-    
-def get_last_id() -> int:
     try:
-        conn = snowflake_conn()
-        cur = conn.cursor()
+        conn = snowflake.connector.connect(
+            #user=os.getenv("SNOWFLAKE_USER"),
+            #password=os.getenv("SNOWFLAKE_PASSWORD"),
+            account=os.getenv("SNOWFLAKE_ACCOUNT"),
+            #authenticator='externalbrowser',
+            authenticator='oauth',
+            token=os.getenv("SNOWFLAKE_TOKEN"),
+            database=os.getenv("SNOWFLAKE_DATABASE"),
+            schema=os.getenv("SNOWFLAKE_SCHEMA")
+        )
 
-        cur.execute("SELECT MAX(asteroid_id) FROM NEAR_EARTH_OBJECT_DATA")
+        logger.info("Conexão bem estabelecida com o Snowflake")
 
-        max_id = cur.fetchone()[0]
-        cur.close()
-
-        if max_id < 1:
-            return 1
-        
-        return max_id
+        return conn
     except Exception as e:
-        logger.error(f"Erro ao coletar max_id da tabela NEAR_EARTH_OBJECT_DATA: {e}")
+        logger.error(f"Erro ao estabelecer conexao com o Snowflake: {e}")
+
+    
+    
 
