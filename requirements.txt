@@ -3,5 +3,4 @@ dotenv
 boto3
 pandas
 pyarrow
-snowflake
-snowflake-connector-python
+psycopg2

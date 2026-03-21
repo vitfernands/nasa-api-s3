@@ -1,3 +1,5 @@
+
+#Atualmente a conexão não está sendo feita no Snowflake, está sendo realizada pelo Postgres
 import os
 from cryptography.hazmat.primitives import serialization
 import snowflake.connector
