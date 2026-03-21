@@ -10,9 +10,9 @@ def connect_to_postgresql():
         conn = psycopg2.connect(
                 host="localhost",
                 port=5432,          
-                dbname=os.getenv("POSTGRES_DATABASE")
+                dbname=os.getenv("POSTGRES_DATABASE"),
                 user=os.getenv("POSTGRES_USER"),
-                password=os.getenv("POSTGRES_PASSWORD")"
+                password=os.getenv("POSTGRES_PASSWORD")
             )
         return conn
     except psycopg2.OperationalError as e:

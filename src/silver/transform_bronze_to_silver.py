@@ -1,7 +1,6 @@
 import pandas as pd
 from utils.logging_config import logger
 from datetime import datetime, date, time
-from utils.get_max_id import get_last_id
 
 def transform_bronze_to_silver(df):
     try:
@@ -27,12 +26,6 @@ def transform_bronze_to_silver(df):
         print(df.head())
         print(f"Tipo de dado da coluna close_approach_date: {df["close_approach_date"].dtype}")
         print(f"Tipo de dado da coluna upload_date: {df["upload_date"].dtype}")
-
-        #adicionando id
-        max_id = get_last_id()
-        new_id = max_id + 1
-
-        df["asteroid_id"] = range(new_id, new_id + len(df))
 
         return df
     
