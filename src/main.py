@@ -9,11 +9,13 @@ from src.silver.extract_bronze_data import extract_from_bronze
 from src.silver.extract_silver_data import extract_from_silver
 from src.silver.transform_bronze_to_silver import transform_bronze_to_silver
 from src.silver.load_silver_file import load_silver
+from src.silver.send_to_gold import load_to_postgres
 
 load_dotenv()
 
 api_key = os.getenv("API_KEY")
 bucket_name = os.getenv("S3_BUCKET_NAME")
+table_name = 'near_earth_objects'
 
 def main():
     today = str(date.today())
@@ -25,6 +27,7 @@ def main():
     load_silver(s3, bucket_name, df, today)
     db_conn = connect_to_postgresql()
     silver_df = extract_from_silver(s3, bucket_name, today)
+    load_to_postgres(db_conn, silver_df, table_name)
 
 if __name__ == "__main__":
     main()
